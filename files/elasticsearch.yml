@@ -1,0 +1,2 @@
+network.bind_host: localhost
+script.disable_dynamic: true
