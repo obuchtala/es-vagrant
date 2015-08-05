@@ -24,10 +24,15 @@ install_or_update build-essential
 
 install_or_update openjdk-7-jre
 
-if ! program_installed elasticsearch; then
+if [ ! -f /usr/share/elasticsearch/bin/elasticsearch ]; then
+  if [ -f elasticsearch-1.7.1.deb ]; then
+    rm elasticsearch-1.7.1.deb
+  fi
   wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.1.deb
-  dpkg -i elasticsearch-1.7.1.deb
+  sudo dpkg -i elasticsearch-1.7.1.deb
 fi
 
-cp /vagrant/files/elasticsearch.yml /etc/elasticsearch/
-service elasticsearch restart
+sudo cp /vagrant/files/elasticsearch.yml /etc/elasticsearch/
+
+sudo service networking restart
+sudo service elasticsearch restart
